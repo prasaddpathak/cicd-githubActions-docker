@@ -1,0 +1,19 @@
+{
+  "name": "cicd-tutorial",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "jest --watchAll --verbose"
+  },
+  "devDependencies": {
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "jest": "^29.0.3",
+    "jest-environment-jsdom": "^29.0.3"
+  }
+}
