@@ -21,6 +21,7 @@ jobs:
       with:
         node-version: 16.x
         cache: 'npm'
+        cache-dependency-path: cicd-tutorial/package-lock.json
     - name: Install and run
       working-directory: ./cicd-tutorial
       run: |
