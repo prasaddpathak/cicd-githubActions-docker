@@ -10,21 +10,39 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build-test:
 
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v3
-    - name: Use Node.js
+
+    - name: Install NodeJs
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
         cache: 'npm'
         cache-dependency-path: cicd-tutorial/package-lock.json
-    - name: Install and run
+        
+    - name: Install dependencies, build and run tests
       working-directory: ./cicd-tutorial
       run: |
         npm ci
         npm run build --if-present
         npm test
+
+  publish-image:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: prasaddpathak/tutorial
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
