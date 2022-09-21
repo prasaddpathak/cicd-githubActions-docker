@@ -16,13 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js 16.x
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
         cache: 'npm'
+        cache-dependency-path: cicd-tutorial/package-lock.json
     - name: Install and run
-      working-directory: ./app
+      working-directory: ./cicd-tutorial
       run: |
         npm ci
         npm run build --if-present
